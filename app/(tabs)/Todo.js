@@ -6,10 +6,15 @@ import React, { useRef, useState } from "react";
 import { TouchableOpacity } from "react-native";
 
 const hello = () => {
-    const [showModal, setShowModal] = useState(false)
-    console.log(showModal)
+    const [showModalArray, setShowModalArray] = useState(Array(datas.length).fill(false));
+    // console.log(showModal)
     const ref = React.useRef(null)
-    const ToDoList = ({ item }) => {
+    const tampilModal = (index) => {
+        const newShowModalArray = [...showModalArray];
+        newShowModalArray[index] = !newShowModalArray[index];
+        setShowModalArray(newShowModalArray);
+    }
+    const ToDoList = ({ item, index }) => {
         return (
             <Box
                 bg={"$green400"}
@@ -21,7 +26,7 @@ const hello = () => {
                 // maxWidth="100%"
             >
                 <HStack justifyContent="space-between">
-                    <TouchableOpacity onPress={() => setShowModal(true)} ref={ref}>
+                    <TouchableOpacity onPress={() => tampilModal(index) } >
                         <Box justifyContent="space-between" px={"$3"}>
                             <VStack space="xs">
                                 <Text fontSize={"$sm"} color="$white"> {item.date} </Text>
@@ -30,9 +35,9 @@ const hello = () => {
                         </Box>
                     </TouchableOpacity>
                     <Modal
-                        isOpen={showModal}
+                        isOpen={showModalArray[index]}
                         onClose={() => {
-                        setShowModal(false)
+                        tampilModal(index)
                         }}
                         finalFocusRef={ref}
                     >
