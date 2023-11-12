@@ -63,7 +63,7 @@ const hello = () => {
                             action="positive"
                             borderWidth="$0"
                             onPress={() => {
-                                setShowModal(false)
+                                setShowModalArray(false)
                             }}
                             >
                             <ButtonText>Ok !</ButtonText>
